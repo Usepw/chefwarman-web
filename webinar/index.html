@@ -12,12 +12,12 @@
 :root{
   --bg:#0d0f13; --panel:#161a21; --line:#262c36;
   --fg:#f3f0ea; --muted:#98a0aa;
-  --accent:#e9a53c; --accent2:#5fb3a1;
+  --accent:#e9a53c; --accent2:#5fb3a1; --danger:#e0603f;
 }
 html,body{height:100%}
 body{
   background:var(--bg);color:var(--fg);
-  font-family:Inter,system-ui,-apple-system,sans-serif;
+  font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
   overflow:hidden;-webkit-font-smoothing:antialiased;
 }
 .deck{position:relative;height:100vh;width:100vw}
@@ -25,76 +25,166 @@ body{
 /* ---------- SLIDE BASE ---------- */
 .slide{
   position:absolute;inset:0;display:none;
-  padding:clamp(28px,5vw,70px);
+  padding:clamp(28px,5.2vw,80px);
   flex-direction:column;justify-content:center;
-  opacity:0;transform:scale(.985);transition:opacity .4s ease,transform .4s ease;
+  opacity:0;transform:scale(.985);
+  transition:opacity .4s ease,transform .4s ease;
 }
 .slide.active{display:flex;opacity:1;transform:scale(1)}
-.kicker{font-size:clamp(11px,1.1vw,14px);letter-spacing:.18em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:12px}
+
+.kicker{
+  font-size:clamp(11px,1.1vw,14px);letter-spacing:.18em;
+  text-transform:uppercase;color:var(--accent);font-weight:600;
+  margin-bottom:clamp(10px,1.4vw,18px);
+}
 h1{font-size:clamp(34px,5.2vw,76px);line-height:1.05;font-weight:800;letter-spacing:-.02em}
-h2{font-size:clamp(26px,3.4vw,48px);line-height:1.12;font-weight:700;letter-spacing:-.015em;margin-bottom:24px}
-.lead{font-size:clamp(15px,1.5vw,20px);line-height:1.5;color:var(--muted);max-width:60ch}
+h2{font-size:clamp(26px,3.4vw,48px);line-height:1.12;font-weight:700;letter-spacing:-.015em;margin-bottom:clamp(16px,2.4vw,34px)}
+.lead{font-size:clamp(15px,1.55vw,22px);line-height:1.55;color:var(--muted);max-width:62ch}
 .accent{color:var(--accent)}
 .accent2{color:var(--accent2)}
 
-/* ---------- SLIDE 1 ---------- */
+/* ---------- TITLE ---------- */
 .title-wrap{max-width:1000px}
-.title-sub{font-size:clamp(15px,1.7vw,24px);color:var(--muted);margin-top:18px;line-height:1.5}
-.title-meta{margin-top:40px;display:flex;gap:16px;align-items:center;font-size:15px;color:var(--muted)}
-.title-meta strong{color:var(--fg)}
+.title-sub{
+  font-size:clamp(15px,1.7vw,24px);color:var(--muted);margin-top:clamp(14px,1.8vw,24px);
+  line-height:1.5;font-weight:400;max-width:52ch;
+}
+.title-meta{
+  margin-top:clamp(26px,4vw,54px);display:flex;flex-wrap:wrap;
+  gap:clamp(12px,2vw,28px);align-items:center;
+  font-size:clamp(12px,1.15vw,15px);color:var(--muted);
+}
+.title-meta strong{color:var(--fg);font-weight:600}
 .dot{width:4px;height:4px;border-radius:50%;background:var(--line)}
 
-/* ---------- VISUAL SLIDE 5 (DIAGRAM WITH IMAGES) ---------- */
-.diagram{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;width:100%;max-width:1100px;margin:0 auto}
-.node{background:var(--panel);border:1px solid var(--line);border-radius:12px;display:flex;flex-direction:column;overflow:hidden;text-align:center;font-size:13px;font-weight:600;}
-.node img{width:100%;height:90px;object-fit:cover;border-bottom:1px solid var(--line)}
-.node span{padding:10px}
-.node.center{background:radial-gradient(circle at 50% 40%,rgba(233,165,60,.25),rgba(233,165,60,.05));border:2px solid var(--accent);color:var(--accent);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;flex-direction:column;gap:8px}
-.node.center .icon{font-size:32px}
+/* ---------- LISTS ---------- */
+.bullets{display:flex;flex-direction:column;gap:clamp(14px,2vw,26px);margin-top:clamp(8px,1.4vw,20px)}
+.bullet{display:flex;gap:clamp(14px,1.8vw,24px);align-items:flex-start}
+.bullet .mark{
+  flex:0 0 auto;width:clamp(26px,2.6vw,36px);height:clamp(26px,2.6vw,36px);
+  border-radius:8px;background:rgba(233,165,60,.14);border:1px solid rgba(233,165,60,.32);
+  display:grid;place-items:center;font-size:clamp(12px,1.2vw,15px);
+  color:var(--accent);font-weight:700;
+}
+.bullet .body{font-size:clamp(15px,1.7vw,24px);line-height:1.4}
+.bullet .body small{display:block;color:var(--muted);font-size:clamp(12px,1.2vw,16px);margin-top:6px;line-height:1.5;font-weight:400}
 
-/* ---------- VISUAL SLIDE 7 (KPI WITH IMAGES) ---------- */
-.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:24px;width:100%}
-.kpi{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;}
-.kpi-img{width:100%;height:120px;object-fit:cover;border-bottom:1px solid var(--line)}
-.kpi-content{padding:16px;display:flex;flex-direction:column;gap:4px;}
-.kpi .n{font-family:'JetBrains Mono',monospace;font-size:28px;font-weight:700;color:var(--accent);line-height:1}
-.kpi .u{font-size:12px;color:var(--muted);margin-left:2px;font-weight:500}
-.kpi .l{font-size:15px;font-weight:600;margin-top:4px}
-.kpi .d{font-size:12px;color:var(--muted)}
+/* ---------- QUOTE ---------- */
+.quote{
+  margin-top:clamp(22px,3vw,40px);padding-left:clamp(16px,2vw,26px);
+  border-left:3px solid var(--accent);
+  font-size:clamp(15px,1.65vw,23px);line-height:1.5;color:var(--fg);
+  font-style:italic;max-width:60ch;
+}
 
-/* ---------- VISUAL SLIDE 8 (MOCKUP FORM) ---------- */
-.mockup-form{background:#fff;color:#111;border-radius:8px;padding:20px;width:100%;max-width:800px;font-family:'Inter',sans-serif;box-shadow:0 10px 30px rgba(0,0,0,.5);transform:rotate(-1deg);margin:0 auto}
-.mockup-form .header{display:flex;justify-content:space-between;border-bottom:2px solid #111;padding-bottom:10px;margin-bottom:12px;font-size:14px;font-weight:700}
-.mockup-table{width:100%;border-collapse:collapse;font-size:12px}
-.mockup-table th{text-align:left;border-bottom:1px solid #ccc;padding:8px 4px;color:#666}
-.mockup-table td{border-bottom:1px solid #eee;padding:8px 4px}
-.mockup-table .note{color:#e0603f;font-weight:700;font-style:italic;transform:rotate(-2deg);display:inline-block}
+/* ---------- GALERI GAMBAR (SLIDE 5) ---------- */
+.galeri {
+  display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; align-items: stretch; margin-top: 20px; width: 100%;
+}
+.galeri-item {
+  background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 10px;
+  text-align: center; width: 130px; display: flex; flex-direction: column; transition: transform 0.2s;
+}
+.galeri-item:hover { transform: translateY(-3px); }
+.galeri-item img {
+  width: 100%; height: 100px; object-fit: cover; border-radius: 8px; margin-bottom: 8px;
+}
+.galeri-item span {
+  font-size: 11px; font-weight: 600; color: var(--fg); line-height: 1.2; margin-top: auto;
+}
+.galeri-item.base {
+  border: 2px solid var(--accent); box-shadow: 0 0 20px rgba(233, 165, 60, 0.2);
+}
+.galeri-item.base span { color: var(--accent); font-weight: 800; font-size: 12px; }
 
-/* ---------- VISUAL SLIDE 9 (DUAL BAR CHART) ---------- */
-.chart-container{display:flex;gap:40px;margin-top:20px;width:100%}
-.chart-col{flex:1;display:flex;flex-direction:column;gap:12px}
-.chart-title{font-size:14px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:600;margin-bottom:8px}
-.bar-group{display:flex;flex-direction:column;gap:4px}
-.bar-label{font-size:13px;display:flex;justify-content:space-between}
-.bar-track{background:var(--line);height:24px;border-radius:4px;overflow:hidden;position:relative}
-.bar-fill{height:100%;background:var(--muted);border-radius:4px;display:flex;align-items:center;padding-left:8px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--bg);font-weight:700;transition:width 1s ease}
-.bar-fill.win{background:var(--accent)}
-.bar-fill.win2{background:var(--accent2)}
+/* ---------- TABLE ---------- */
+.tbl{width:100%;border-collapse:collapse;margin-top:clamp(10px,1.4vw,18px);font-size:clamp(12px,1.35vw,19px)}
+.tbl th{
+  text-align:left;padding:clamp(8px,1.1vw,14px) clamp(8px,1vw,14px);
+  border-bottom:1.5px solid var(--line);color:var(--muted);
+  font-size:clamp(10px,1vw,13px);letter-spacing:.06em;text-transform:uppercase;font-weight:600;
+}
+.tbl td{
+  padding:clamp(9px,1.2vw,16px) clamp(8px,1vw,14px);
+  border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums;
+}
+.tbl tr:last-child td{border-bottom:none}
+.tbl .win{color:var(--accent);font-weight:800}
+.tbl .win2{color:var(--accent2);font-weight:800}
+.mono{font-family:'JetBrains Mono',monospace}
 
-/* ---------- VISUAL SLIDE 11 (FLOW) ---------- */
-.flow{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px;align-items:center}
-.step{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:12px 16px;font-size:14px;display:flex;align-items:center;gap:8px}
-.step .ico{font-size:18px}
-.arrow{color:var(--muted);font-size:14px}
+/* ---------- CALLOUT ---------- */
+.callout{
+  margin-top:clamp(14px,2vw,24px);padding:clamp(14px,1.8vw,24px) clamp(16px,2vw,28px);
+  border-radius:12px;background:var(--panel);border:1px solid var(--line);
+  display:flex;flex-direction:column;gap:8px;max-width:88ch;
+}
+.callout .row{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap;font-size:clamp(13px,1.4vw,19px)}
+.callout .lbl{color:var(--muted);min-width:150px;font-size:clamp(11px,1.15vw,14px);letter-spacing:.04em;text-transform:uppercase}
+.callout strong{font-weight:700}
+.note-line{margin-top:clamp(10px,1.4vw,16px);font-size:clamp(11px,1.15vw,14px);color:var(--muted);font-style:italic;max-width:80ch;line-height:1.5}
+
+/* ---------- KPI GRID ---------- */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:clamp(12px,1.6vw,22px);margin-top:clamp(16px,2vw,28px);max-width:1000px}
+.kpi{
+  background:var(--panel);border:1px solid var(--line);border-radius:12px;
+  padding:clamp(14px,1.8vw,24px);
+}
+.kpi .n{font-family:'JetBrains Mono',monospace;font-size:clamp(22px,2.6vw,38px);font-weight:700;color:var(--accent);line-height:1}
+.kpi .u{font-size:clamp(11px,1.1vw,14px);color:var(--muted);margin-left:4px;font-weight:500}
+.kpi .l{font-size:clamp(12px,1.2vw,15px);margin-top:10px;font-weight:500}
+.kpi .d{font-size:clamp(10px,1vw,12px);color:var(--muted);margin-top:4px}
+
+/* ---------- STEPS / FLOW ---------- */
+.flow{display:flex;flex-wrap:wrap;gap:clamp(6px,.8vw,10px);margin-top:clamp(14px,2vw,22px);align-items:center}
+.step{
+  background:var(--panel);border:1px solid var(--line);border-radius:999px;
+  padding:clamp(8px,1vw,13px) clamp(12px,1.5vw,20px);
+  font-size:clamp(11px,1.15vw,15px);font-weight:500;white-space:nowrap;
+}
+.arrow{color:var(--accent);font-size:clamp(12px,1.3vw,17px)}
+
+/* ---------- CARDS ---------- */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:clamp(12px,1.6vw,20px);margin-top:clamp(16px,2vw,26px)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:clamp(14px,1.8vw,24px)}
+.card .t{font-size:clamp(10px,1.05vw,12px);letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:8px}
+.card .h{font-size:clamp(14px,1.5vw,20px);font-weight:700;margin-bottom:6px}
+.card .p{font-size:clamp(12px,1.2vw,15px);color:var(--muted);line-height:1.5}
+
+/* ---------- CTA ---------- */
+.cta-wrap{display:flex;gap:clamp(24px,4vw,60px);align-items:center;flex-wrap:wrap;margin-top:clamp(18px,2.4vw,34px)}
+.qr{
+  width:clamp(130px,14vw,200px);height:clamp(130px,14vw,200px);
+  background:#fff;border-radius:12px;display:grid;place-items:center;
+  color:#000;font-size:11px;text-align:center;padding:8px;font-weight:600;
+}
+.qr img{width:100%;height:100%;object-fit:contain}
 
 /* ---------- UI CHROME ---------- */
 .progress{position:fixed;top:0;left:0;height:3px;background:var(--accent);width:0;transition:width .3s ease;z-index:100}
-.counter{position:fixed;bottom:22px;right:28px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);z-index:100}
-.brand{position:fixed;bottom:22px;left:28px;font-size:11px;color:#5a616b;z-index:100}
-.hint{position:fixed;top:20px;right:28px;font-size:11px;color:#4d545e;z-index:100}
-.notes{position:fixed;left:0;right:0;bottom:0;max-height:38vh;overflow:auto;background:rgba(10,12,16,.96);border-top:1px solid var(--accent);padding:18px 28px 26px;font-size:14px;line-height:1.6;color:#cfd4da;z-index:99;display:none;backdrop-filter:blur(8px)}
+.counter{
+  position:fixed;bottom:22px;right:28px;font-family:'JetBrains Mono',monospace;
+  font-size:12px;color:var(--muted);z-index:100;letter-spacing:.06em;
+}
+.brand{
+  position:fixed;bottom:22px;left:28px;font-size:11px;color:#5a616b;
+  letter-spacing:.06em;z-index:100;
+}
+.hint{
+  position:fixed;top:20px;right:28px;font-size:11px;color:#4d545e;
+  z-index:100;letter-spacing:.04em;
+}
+
+/* ---------- NOTES ---------- */
+.notes{
+  position:fixed;left:0;right:0;bottom:0;max-height:38vh;overflow:auto;
+  background:rgba(10,12,16,.96);border-top:1px solid var(--accent);
+  padding:18px 28px 26px;font-size:14px;line-height:1.6;color:#cfd4da;
+  z-index:99;display:none;backdrop-filter:blur(8px);
+}
 .notes.show{display:block}
 .notes .nt{color:var(--accent);font-size:11px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:8px;font-weight:700}
+.notes p{max-width:96ch}
 </style>
 </head>
 <body>
@@ -115,37 +205,33 @@ h2{font-size:clamp(26px,3.4vw,48px);line-height:1.12;font-weight:700;letter-spac
       <span>Chef Warman Food Network</span>
     </div>
   </div>
-  <div class="notes"><div class="nt">Catatan</div><p>Selamat sore. Saya akan bicara soal satu hal yang paling sering luput di dapur MBG: bukan resepnya yang mahal, tapi sistemnya yang belum terukur.</p></div>
+  <div class="notes"><div class="nt">Catatan</div><p>Selamat sore. Saya akan bicara soal satu hal yang paling sering luput di dapur MBG: bukan resepnya yang mahal, tapi sistemnya yang belum terukur. Dalam 35 menit, saya tunjukkan satu pendekatan — dan data lapangan yang mendukungnya.</p></div>
 </section>
 
 <!-- 2 -->
 <section class="slide">
   <div class="kicker">Masalah</div>
   <h2>Menu kompleks = <span class="accent">biaya tersembunyi</span></h2>
-  <div class="kpis" style="grid-template-columns:repeat(3,1fr); margin-top:32px">
-    <div class="kpi"><div class="kpi-content"><div class="n">01</div><div class="l">Banyak Tahapan</div><div class="d">Tenaga, waktu, energi membengkak</div></div></div>
-    <div class="kpi"><div class="kpi-content"><div class="n">02</div><div class="l">Banyak Bahan</div><div class="d">Risiko sisa dan pemborosan tinggi</div></div></div>
-    <div class="kpi"><div class="kpi-content"><div class="n">03</div><div class="l">Banyak Variasi</div><div class="d">Sulit dikontrol dan distandarkan</div></div></div>
+  <div class="bullets">
+    <div class="bullet"><div class="mark">01</div><div class="body">Banyak tahapan<small>Banyak tenaga, waktu, energi</small></div></div>
+    <div class="bullet"><div class="mark">02</div><div class="body">Banyak bahan<small>Banyak sisa, banyak risiko</small></div></div>
+    <div class="bullet"><div class="mark">03</div><div class="body">Banyak variasi<small>Banyak resep, sulit dikontrol</small></div></div>
   </div>
-  <div style="margin-top:32px;padding-left:16px;border-left:3px solid var(--accent);font-size:20px;font-style:italic;color:var(--fg)">
-    "Yang tidak bisa diprediksi, tidak bisa dihemat."
-  </div>
-  <div class="notes"><div class="nt">Catatan</div><p>Semakin banyak tahapan, semakin sulit memprediksi. Kalau tidak bisa dijawab sebelum masak, kita hanya berharap.</p></div>
+  <div class="quote">Yang tidak bisa diprediksi, tidak bisa dihemat.</div>
+  <div class="notes"><div class="nt">Catatan</div><p>Semakin banyak tahapan, semakin sulit memprediksi: berapa orang, berapa jam, berapa bahan terbuang. Kalau tidak bisa dijawab sebelum masak, kita hanya berharap. Harapan bukan strategi pengendalian biaya.</p></div>
 </section>
 
 <!-- 3 -->
 <section class="slide">
   <div class="kicker">Konteks</div>
   <h2>Keputusan Kepala BGN <span class="accent2">63551/2026</span></h2>
-  <div class="kpis" style="grid-template-columns:repeat(3,1fr); margin-top:32px">
-    <div class="kpi"><div class="kpi-content"><div class="l">Biaya Operasional</div><div class="d">Komponen pembiayaan disesuaikan</div></div></div>
-    <div class="kpi"><div class="kpi-content"><div class="l">Tenaga Relawan</div><div class="d">Pengaturan ulang keterlibatan</div></div></div>
-    <div class="kpi"><div class="kpi-content"><div class="l">Insentif</div><div class="d">Penyesuaian skema</div></div></div>
+  <div class="cards">
+    <div class="card"><div class="t">Berubah</div><div class="h">Biaya operasional</div><div class="p">Komponen pembiayaan disesuaikan</div></div>
+    <div class="card"><div class="t">Berubah</div><div class="h">Tenaga relawan</div><div class="p">Pengaturan ulang keterlibatan</div></div>
+    <div class="card"><div class="t">Berubah</div><div class="h">Insentif</div><div class="p">Penyesuaian skema</div></div>
   </div>
-  <div style="margin-top:32px;padding-left:16px;border-left:3px solid var(--accent);font-size:20px;font-style:italic;color:var(--fg)">
-    Implikasi: perencanaan menu harus <strong>terukur</strong>, bukan kira-kira.
-  </div>
-  <div class="notes"><div class="nt">Catatan</div><p>Regulasi ini memaksa kita berhenti menebak. Satu-satunya cara agar dapur tetap sehat: menu yang bisa dihitung sebelum dimasak.</p></div>
+  <div class="quote">Implikasi: perencanaan menu harus <strong>terukur</strong>, bukan kira-kira.</div>
+  <div class="notes"><div class="nt">Catatan</div><p>Regulasi ini memaksa kita berhenti menebak. Satu-satunya cara agar dapur tetap sehat: menu yang bisa dihitung sebelum dimasak, bukan setelah.</p></div>
 </section>
 
 <!-- 4 -->
@@ -153,185 +239,152 @@ h2{font-size:clamp(26px,3.4vw,48px);line-height:1.12;font-weight:700;letter-spac
   <div class="kicker">Konsep</div>
   <h2>One Base, <span class="accent">Multiple Menu</span></h2>
   <p class="lead">Satu adonan dasar ayam yang distandardisasi. Variasi dibentuk melalui finishing — bukan resep baru.</p>
-  <div class="kpis" style="grid-template-columns:repeat(3,1fr); margin-top:24px">
-    <div class="kpi"><div class="kpi-content"><div class="l">Dimensi 1</div><div class="d">Kulit / pembungkus</div></div></div>
-    <div class="kpi"><div class="kpi-content"><div class="l">Dimensi 2</div><div class="d">Coating / lapisan luar</div></div></div>
-    <div class="kpi"><div class="kpi-content"><div class="l">Dimensi 3</div><div class="d">Isian</div></div></div>
-    <div class="kpi"><div class="kpi-content"><div class="l">Dimensi 4</div><div class="d">Bentuk</div></div></div>
-    <div class="kpi"><div class="kpi-content"><div class="l">Dimensi 5</div><div class="d">Teknik memasak</div></div></div>
+  <div class="cards" style="margin-top:28px">
+    <div class="card"><div class="t">Dimensi 1</div><div class="h">Kulit / pembungkus</div></div>
+    <div class="card"><div class="t">Dimensi 2</div><div class="h">Coating / lapisan luar</div></div>
+    <div class="card"><div class="t">Dimensi 3</div><div class="h">Isian</div></div>
+    <div class="card"><div class="t">Dimensi 4</div><div class="h">Bentuk</div></div>
+    <div class="card"><div class="t">Dimensi 5</div><div class="h">Teknik memasak</div></div>
   </div>
-  <div class="notes"><div class="nt">Catatan</div><p>Kita tidak perlu menciptakan resep baru setiap kali ingin menu baru. Satu dasar yang benar.</p></div>
+  <div class="notes"><div class="nt">Catatan</div><p>Kita tidak perlu menciptakan resep baru setiap kali ingin menu baru. Satu dasar yang benar, distandardisasi, variasinya di finishing.</p></div>
 </section>
 
-<!-- 5 VISUAL DENGAN GAMBAR -->
+<!-- 5 -->
 <section class="slide">
   <div class="kicker">Peta Kemungkinan</div>
   <h2>1 Base → <span class="accent">8 Produk</span></h2>
-  <div class="diagram">
-    <<div class="diagram">
-            <div class="node"><img src="IMG_9734.jpeg" style="width:100%; height:100px; object-fit:cover; border-radius:6px; margin-bottom:8px;"><small>Chicken Nori</small></div>
-            <div class="node"><img src="IMG_9735.jpeg" style="width:100%; height:100px; object-fit:cover; border-radius:6px; margin-bottom:8px;"><small>Chicken Pangsit</small></div>
-            <div class="node"><img src="IMG_9736.jpeg" style="width:100%; height:100px; object-fit:cover; border-radius:6px; margin-bottom:8px;"><small>Chicken Dimsum</small></div>
-            
-            <div class="node"><img src="IMG_9737.jpeg" style="width:100%; height:100px; object-fit:cover; border-radius:6px; margin-bottom:8px;"><small>Chicken Panir</small></div>
-            <div class="node center" style="padding:10px;">
-                <img src="IMG_9742.jpeg" style="width:100%; height:120px; object-fit:cover; border-radius:8px; margin-bottom:8px; border:2px solid #e9a53c;">
-                <small style="font-size:0.8em; font-weight:800; color:#e9a53c;">CHICKEN BASE</small>
-            </div>
-            <div class="node"><img src="IMG_9738.jpeg" style="width:100%; height:100px; object-fit:cover; border-radius:6px; margin-bottom:8px;"><small>Chicken Crumble</small></div>
-            
-            <div class="node"><img src="IMG_9739.jpeg" style="width:100%; height:100px; object-fit:cover; border-radius:6px; margin-bottom:8px;"><small>Chicken Gyoza</small></div>
-            <div class="node"><img src="IMG_9740.jpeg" style="width:100%; height:100px; object-fit:cover; border-radius:6px; margin-bottom:8px;"><small>Chicken Rambutan</small></div>
-            <div class="node"><img src="IMG_9741.jpeg" style="width:100%; height:100px; object-fit:cover; border-radius:6px; margin-bottom:8px;"><small>Chicken Ball Kuah</small></div>
-          </div>
-  <div class="notes"><div class="nt">Catatan</div><p>Ini peta kemungkinan, bukan target. Jangan membuat semuanya sekaligus. Bentuk dan tampilannya bisa berbeda-beda, tapi dasarnya satu.</p></div>
+  
+  <div class="galeri">
+    <div class="galeri-item"><img src="IMG_9734.jpeg"><span>Chicken Nori</span></div>
+    <div class="galeri-item"><img src="IMG_9735.jpeg"><span>Chicken Pangsit</span></div>
+    <div class="galeri-item"><img src="IMG_9736.jpeg"><span>Chicken Dimsum</span></div>
+    
+    <div class="galeri-item"><img src="IMG_9737.jpeg"><span>Chicken Panir</span></div>
+    <div class="galeri-item base"><img src="IMG_9742.jpeg"><span>CHICKEN BASE</span></div>
+    <div class="galeri-item"><img src="IMG_9738.jpeg"><span>Chicken Crumble</span></div>
+    
+    <div class="galeri-item"><img src="IMG_9739.jpeg"><span>Chicken Gyoza</span></div>
+    <div class="galeri-item"><img src="IMG_9740.jpeg"><span>Chicken Rambutan</span></div>
+    <div class="galeri-item"><img src="IMG_9741.jpeg"><span>Chicken Ball Kuah</span></div>
+  </div>
+
+  <div class="notes"><div class="nt">Catatan</div><p>Ini peta kemungkinan, bukan target. Jangan membuat semuanya sekaligus.</p></div>
 </section>
 
 <!-- 6 -->
 <section class="slide">
   <div class="kicker">Realistis</div>
   <h2>Mulai dari <span class="accent">3</span>, bukan 8</h2>
-  <div class="kpis" style="grid-template-columns:repeat(3,1fr); margin-top:32px">
-    <div class="kpi"><div class="kpi-content"><div class="l">Chicken Panir</div><div class="d">Goreng (Uji Coating)</div></div></div>
-    <div class="kpi"><div class="kpi-content"><div class="l">Chicken Dimsum</div><div class="d">Kukus (Uji Kapasitas)</div></div></div>
-    <div class="kpi"><div class="kpi-content"><div class="l">Ball Kuah</div><div class="d">Rebus (Uji Tekstur)</div></div></div>
-  </div>
-  <div style="margin-top:32px;padding-left:16px;border-left:3px solid var(--accent);font-size:20px;font-style:italic;color:var(--fg)">
-    Tiga teknik berbeda. Satu base yang sama.
-  </div>
-  <div class="notes"><div class="nt">Catatan</div><p>Kalau satu base bisa menopang tiga teknik, sisanya soal pilihan.</p></div>
+  <table class="tbl" style="max-width:720px">
+    <thead><tr><th>Produk</th><th>Teknik</th><th>Untuk menguji</th></tr></thead>
+    <tbody>
+      <tr><td>Chicken Panir</td><td>Goreng</td><td>Coating &amp; minyak</td></tr>
+      <tr><td>Chicken Dimsum</td><td>Kukus</td><td>Waktu &amp; kapasitas kukusan</td></tr>
+      <tr><td>Chicken Ball Kuah</td><td>Rebus</td><td>Tekstur &amp; holding time</td></tr>
+    </tbody>
+  </table>
+  <div class="quote">Tiga teknik berbeda. Satu base yang sama.</div>
+  <div class="notes"><div class="nt">Catatan</div><p>Kalau satu base bisa menopang tiga teknik, sisanya soal pilihan. Mulai dari yang paling mudah diukur.</p></div>
 </section>
 
-<!-- 7 VISUAL KPI DENGAN GAMBAR -->
+<!-- 7 -->
 <section class="slide">
   <div class="kicker">Data Lapangan</div>
   <h2>Di dapur kami, ini <span class="accent2">sudah berjalan</span></h2>
   <p class="lead">Empat produk. Satu base. Catatan tim persiapan pada empat hari produksi berbeda.</p>
   <div class="kpis">
-    <div class="kpi">
-      <img src="https://images.unsplash.com/photo-1625938145744-e3805153993e?q=80&w=400&auto=format&fit=crop" class="kpi-img" alt="Gyoza">
-      <div class="kpi-content"><div class="n">5.980<span class="u">pcs</span></div><div class="l">Chicken Gyoza</div><div class="d">18 Oktober</div></div>
-    </div>
-    <div class="kpi">
-      <img src="https://images.unsplash.com/photo-1529042410759-befb1204b468?q=80&w=400&auto=format&fit=crop" class="kpi-img" alt="Bakso">
-      <div class="kpi-content"><div class="n">3.580<span class="u">pcs</span></div><div class="l">Bakso Ayam Nori</div><div class="d">14 Oktober</div></div>
-    </div>
-    <div class="kpi">
-      <img src="https://images.unsplash.com/photo-1527477396000-e27163b481c2?q=80&w=400&auto=format&fit=crop" class="kpi-img" alt="Tsukune">
-      <div class="kpi-content"><div class="n">2.850<span class="u">pcs</span></div><div class="l">Chicken Tsukune</div><div class="d">21 Oktober</div></div>
-    </div>
-    <div class="kpi">
-      <img src="https://images.unsplash.com/photo-1562967914-608f82629710?q=80&w=400&auto=format&fit=crop" class="kpi-img" alt="Ayam Keju">
-      <div class="kpi-content"><div class="n">2.478<span class="u">pcs</span></div><div class="l">Ayam Keju Gacoan</div><div class="d">5 November</div></div>
-    </div>
+    <div class="kpi"><div class="n">5.980<span class="u">pcs</span></div><div class="l">Chicken Gyoza</div><div class="d">18 Oktober</div></div>
+    <div class="kpi"><div class="n">3.580<span class="u">pcs</span></div><div class="l">Bakso Ayam Nori</div><div class="d">14 Oktober</div></div>
+    <div class="kpi"><div class="n">2.850<span class="u">pcs</span></div><div class="l">Chicken Tsukune</div><div class="d">21 Oktober</div></div>
+    <div class="kpi"><div class="n">2.478<span class="u">pcs</span></div><div class="l">Ayam Keju Gacoan</div><div class="d">5 November</div></div>
   </div>
-  <div class="notes"><div class="nt">Catatan</div><p>Ini bukan simulasi. Yang ingin saya tunjukkan bukan angka besarnya — tapi bahwa ini tercatat.</p></div>
+  <div class="notes"><div class="nt">Catatan</div><p>Ini bukan simulasi. Yang ingin saya tunjukkan bukan angka besarnya — tapi bahwa ini tercatat. Karena yang tercatat, bisa diperbaiki.</p></div>
 </section>
 
-<!-- 8 VISUAL MOCKUP FORM -->
+<!-- 8 -->
 <section class="slide">
   <div class="kicker">Sistem Dokumentasi</div>
   <h2>Setiap batch <span class="accent">tercatat</span></h2>
-  
-  <div class="mockup-form">
-    <div class="header">
-      <span>FORMULIR TUGAS HARIAN TIM PERSIAPAN</span>
-      <span>Chicken Gyoza - 18/10</span>
-    </div>
-    <table class="mockup-table">
-      <tr><th>No</th><th>Waktu</th><th>Qty (pcs)</th><th>Kumulatif</th><th>Catatan QC / Kendala</th></tr>
-      <tr><td>1</td><td>21:00</td><td>500</td><td>500</td><td>Kebersihan wadah ✓</td></tr>
-      <tr><td>2</td><td>21:15</td><td>500</td><td>1.000</td><td>Suhu bahan ✓</td></tr>
-      <tr><td>3</td><td>21:20</td><td>500</td><td>1.500</td><td>Spesifikasi potongan ✓</td></tr>
-      <tr><td>4</td><td>21:25</td><td>500</td><td>2.000</td><td>Kebersihan area ✓</td></tr>
-      <tr><td>5</td><td>22:00</td><td>500</td><td>2.500</td><td><span class="note">Kelebihan 356 pcs</span></td></tr>
-    </table>
+  <div class="cards" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
+    <div class="card"><div class="t">Kolom 1</div><div class="h">Nomor batch</div><div class="p">Waktu selesai tiap batch</div></div>
+    <div class="card"><div class="t">Kolom 2</div><div class="h">Quantity</div><div class="p">Per batch &amp; kumulatif</div></div>
+    <div class="card"><div class="t">Kolom 3</div><div class="h">QC / CCP</div><div class="p">Sanitasi, suhu, spesifikasi</div></div>
+    <div class="card" style="border-color:rgba(233,165,60,.4)"><div class="t">Kolom 4</div><div class="h">Kendala lapangan</div><div class="p">Contoh: "Kelebihan 356 pcs"</div></div>
   </div>
-  
-  <div style="margin-top:24px;font-size:16px;color:var(--muted);text-align:center">
-    Kendala yang tidak dicatat akan terulang besok.
-  </div>
-  <div class="notes"><div class="nt">Catatan</div><p>Kami mencatat kelebihan produksi, sisa bahan, waktu tunggu. Bukan hanya hasil.</p></div>
+  <div class="quote">Kendala yang tidak dicatat akan terulang besok.</div>
+  <div class="notes"><div class="nt">Catatan</div><p>Kami mencatat kelebihan produksi, sisa bahan, waktu tunggu freezer. Bukan hanya hasil. Inilah yang membuat kami bisa belajar — dari yang tidak rapi.</p></div>
 </section>
 
-<!-- 9 VISUAL CHART -->
+<!-- 9 KEY -->
 <section class="slide">
   <div class="kicker">Slide Kunci</div>
-  <h2>Satuan menentukan keputusan</h2>
-  
-  <div class="chart-container">
-    <div class="chart-col">
-      <div class="chart-title">Produktivitas (Pcs / Jam / Orang)</div>
-      <div class="bar-group"><div class="bar-label"><span>Gyoza</span><span style="color:var(--accent);font-weight:700">230</span></div><div class="bar-track"><div class="bar-fill win" style="width:100%">Juara</div></div></div>
-      <div class="bar-group"><div class="bar-label"><span>Bakso Nori</span><span>164</span></div><div class="bar-track"><div class="bar-fill" style="width:71%"></div></div></div>
-      <div class="bar-group"><div class="bar-label"><span>Tsukune</span><span>106</span></div><div class="bar-track"><div class="bar-fill" style="width:46%"></div></div></div>
-      <div class="bar-group"><div class="bar-label"><span>Ayam Keju</span><span>64</span></div><div class="bar-track"><div class="bar-fill" style="width:28%"></div></div></div>
-    </div>
-
-    <div class="chart-col">
-      <div class="chart-title">Produktivitas (Kg / Jam / Orang)</div>
-      <div class="bar-group"><div class="bar-label"><span>Gyoza</span><span>4.6</span></div><div class="bar-track"><div class="bar-fill" style="width:73%"></div></div></div>
-      <div class="bar-group"><div class="bar-label"><span>Bakso Nori</span><span>4.9</span></div><div class="bar-track"><div class="bar-fill" style="width:78%"></div></div></div>
-      <div class="bar-group"><div class="bar-label"><span>Tsukune</span><span style="color:var(--accent2);font-weight:700">6.3</span></div><div class="bar-track"><div class="bar-fill win2" style="width:100%">Juara</div></div></div>
-      <div class="bar-group"><div class="bar-label"><span>Ayam Keju</span><span>3.8</span></div><div class="bar-track"><div class="bar-fill" style="width:60%"></div></div></div>
-    </div>
+  <h2>Mengapa satuan menentukan keputusan</h2>
+  <table class="tbl">
+    <thead>
+      <tr><th>Produk</th><th>pcs</th><th>kg adonan</th><th>pcs/jam/orang</th><th>kg/jam/orang</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Gyoza</td><td class="mono">5.980</td><td class="mono">119,6</td><td class="mono win">230</td><td class="mono">4,6</td></tr>
+      <tr><td>Bakso Nori</td><td class="mono">3.580</td><td class="mono">107,4</td><td class="mono">164</td><td class="mono">4,9</td></tr>
+      <tr><td>Tsukune</td><td class="mono">2.850</td><td class="mono">171,0</td><td class="mono">106</td><td class="mono win2">6,3</td></tr>
+      <tr><td>Ayam Keju</td><td class="mono">2.478</td><td class="mono">148,7</td><td class="mono">64</td><td class="mono">3,8</td></tr>
+    </tbody>
+  </table>
+  <div class="callout">
+    <div class="row"><span class="lbl">Dalam pcs</span><strong>Gyoza juara (230) — terlihat 3,6× lebih efisien</strong></div>
+    <div class="row"><span class="lbl">Dalam kg adonan</span><strong class="accent2">Tsukune juara (6,3) — peringkat terbalik</strong></div>
   </div>
-  
-  <div style="margin-top:20px;font-size:13px;color:var(--muted);font-style:italic;text-align:center">
-    *Peringkat terbalik: Gyoza turun, Tsukune naik. Memilih menu berdasarkan porsi (pcs) bisa menyesatkan.
-  </div>
-  
-  <div class="notes"><div class="nt">Catatan · 45 detik · hafalkan</div><p>Empat produk, satu base ayam. Kalau diukur dengan jumlah pieces, Gyoza juara. Tapi begitu diubah ke kilogram adonan, Tsukune yang juara, dan Gyoza turun ke peringkat tiga. Kenapa? Karena Gyoza ringan per unit. Artinya: memilih menu berdasarkan jumlah porsi bisa menyesatkan.</p></div>
+  <div class="note-line">Catatan: kg adonan mengukur tahap pembentukan saja, belum termasuk finishing (coating, isian, pembungkus) dan pemasakan.</div>
+  <div class="notes"><div class="nt">Catatan · 45 detik · hafalkan</div><p>Empat produk, satu base ayam. Kalau diukur dengan jumlah pieces, Gyoza juara — 230 per jam per orang, terlihat 3,6 kali lebih efisien dari Ayam Keju. Tapi begitu diubah ke kilogram adonan, Tsukune yang juara, dan Gyoza turun ke peringkat tiga. Kenapa? Karena Gyoza ringan per unit. Artinya: memilih menu berdasarkan jumlah porsi bisa menyesatkan. Dan jujur — kg adonan pun belum cukup. Ini baru mengukur pembentukan. Belum menghitung coating, isian, pembungkus, dan pemasakan.</p></div>
 </section>
 
 <!-- 10 -->
 <section class="slide">
   <div class="kicker">Batas Pengukuran</div>
   <h2>Kg pun <span class="accent">belum cukup</span></h2>
-  <div class="kpis" style="grid-template-columns:1fr 1fr; margin-top:24px">
-    <div class="kpi"><div class="kpi-content"><div class="l">Ayam Keju · 60 g</div><div class="d">+ isian keju + coating berlapis</div></div></div>
-    <div class="kpi"><div class="kpi-content"><div class="l">Tsukune · 60 g</div><div class="d">Bentuk sederhana, tanpa isian</div></div></div>
+  <div class="cards">
+    <div class="card"><div class="t">Contoh A</div><div class="h">Ayam Keju · 60 g</div><div class="p">+ isian keju + coating berlapis</div></div>
+    <div class="card"><div class="t">Contoh B</div><div class="h">Tsukune · 60 g</div><div class="p">Bentuk sederhana, tanpa isian</div></div>
   </div>
-  <div style="margin-top:32px;padding-left:16px;border-left:3px solid var(--accent);font-size:20px;font-style:italic;color:var(--fg)">
-    Metrik yang benar: Berat × Waktu × Orang × <strong>Kompleksitas</strong>.
+  <div class="callout" style="margin-top:24px">
+    <div class="row"><span class="lbl">Metrik yang benar</span><strong>Berat × Waktu × Orang × <span class="accent">Kompleksitas</span></strong></div>
   </div>
-  <div class="notes"><div class="nt">Catatan</div><p>Berat sama, belum tentu beban sama. Kompleksitas belum ada di form kami. Itulah yang sedang kami bangun.</p></div>
+  <div class="quote">Berat sama, belum tentu beban sama.</div>
+  <div class="notes"><div class="nt">Catatan</div><p>Metrik yang benar harus menangkap empat hal. Yang terakhir — kompleksitas — belum ada di form kami. Itulah yang sedang kami bangun.</p></div>
 </section>
 
-<!-- 11 VISUAL FLOW -->
+<!-- 11 -->
 <section class="slide">
   <div class="kicker">Keamanan Pangan</div>
   <h2>Alur produksi &amp; titik kendali</h2>
   <div class="flow">
-    <div class="step"><span class="ico">📥</span> Terima</div> <span class="arrow">→</span>
-    <div class="step"><span class="ico">⚖️</span> Timbang</div> <span class="arrow">→</span>
-    <div class="step"><span class="ico">🥣</span> Base</div> <span class="arrow">→</span>
-    <div class="step"><span class="ico">🤲</span> Bentuk</div> <span class="arrow">→</span>
-    <div class="step"><span class="ico">🔥</span> Masak</div> <span class="arrow">→</span>
-    <div class="step"><span class="ico">🔍</span> QC</div> <span class="arrow">→</span>
-    <div class="step"><span class="ico">📦</span> Kemas</div>
+    <span class="step">Terima bahan</span><span class="arrow">→</span>
+    <span class="step">Timbang</span><span class="arrow">→</span>
+    <span class="step">Buat base</span><span class="arrow">→</span>
+    <span class="step">Bagi per unit</span><span class="arrow">→</span>
+    <span class="step">Bentuk</span><span class="arrow">→</span>
+    <span class="step">Masak</span><span class="arrow">→</span>
+    <span class="step">QC</span><span class="arrow">→</span>
+    <span class="step">Kemas</span>
   </div>
-  
-  <div class="kpis" style="grid-template-columns:repeat(3,1fr); margin-top:32px">
-    <div class="kpi"><div class="kpi-content"><div class="l" style="color:var(--accent)">CCP 1</div><div class="d">Suhu &amp; pemisahan mentah-mateng</div></div></div>
-    <div class="kpi"><div class="kpi-content"><div class="l" style="color:var(--accent)">CCP 2</div><div class="d">Suhu inti per teknik (kukus ≠ goreng)</div></div></div>
-    <div class="kpi"><div class="kpi-content"><div class="l" style="color:var(--accent)">CCP 3</div><div class="d">Waktu tunggu &amp; penyimpanan</div></div></div>
+  <div class="cards" style="margin-top:26px">
+    <div class="card"><div class="t">CCP 1</div><div class="h">Suhu &amp; pemisahan</div><div class="p">Mentah–matang tidak boleh bersentuhan</div></div>
+    <div class="card"><div class="t">CCP 2</div><div class="h">Suhu inti per teknik</div><div class="p">Kukus ≠ goreng ≠ rebus ≠ oven</div></div>
+    <div class="card"><div class="t">CCP 3</div><div class="h">Waktu tunggu &amp; simpan</div><div class="p">Termasuk sebelum masuk freezer</div></div>
   </div>
-  <div class="notes"><div class="nt">Catatan</div><p>Satu base bukan berarti satu cara masak. Setiap teknik punya parameter kematangan sendiri.</p></div>
+  <div class="notes"><div class="nt">Catatan</div><p>Satu base bukan berarti satu cara masak. Setiap teknik punya parameter kematangan sendiri. Ini yang membedakan dapur yang aman dari dapur yang beruntung.</p></div>
 </section>
 
 <!-- 12 -->
 <section class="slide">
   <div class="kicker">Kerangka</div>
   <h2>Efisiensi di <span class="accent">tiga level</span></h2>
-  <div class="kpis" style="grid-template-columns:repeat(3,1fr); margin-top:32px">
-    <div class="kpi"><div class="kpi-content"><div class="n">L1</div><div class="l">Bahan</div><div class="d">Satu formula, rendemen terkontrol</div></div></div>
-    <div class="kpi"><div class="kpi-content"><div class="n">L2</div><div class="l">Pekerjaan</div><div class="d">Persiapan terpusat, tim terbagi</div></div></div>
-    <div class="kpi"><div class="kpi-content"><div class="n">L3</div><div class="l">Perencanaan</div><div class="d">Variasi dari base yang sama</div></div></div>
+  <div class="bullets">
+    <div class="bullet"><div class="mark">L1</div><div class="body">Bahan<small>Satu formula, rendemen terkontrol, penimbangan terstandar</small></div></div>
+    <div class="bullet"><div class="mark">L2</div><div class="body">Pekerjaan<small>Persiapan terpusat, tim terbagi per tahap</small></div></div>
+    <div class="bullet"><div class="mark">L3</div><div class="body">Perencanaan<small>Variasi menu direncanakan dari base yang sama</small></div></div>
   </div>
-  <div style="margin-top:32px;padding-left:16px;border-left:3px solid var(--accent);font-size:20px;font-style:italic;color:var(--fg)">
-    Hemat bukan soal beli lebih murah. Hemat itu soal sistem yang bisa diprediksi.
-  </div>
+  <div class="quote">Hemat bukan soal beli lebih murah. Hemat itu soal sistem yang bisa diprediksi.</div>
   <div class="notes"><div class="nt">Catatan</div><p>Level satu paling sering dibahas orang. Padahal level dua dan tiga yang biasanya menentukan.</p></div>
 </section>
 
@@ -339,39 +392,37 @@ h2{font-size:clamp(26px,3.4vw,48px);line-height:1.12;font-weight:700;letter-spac
 <section class="slide">
   <div class="kicker">Tindak Lanjut</div>
   <h2>Mari ukur <span class="accent">bersama</span></h2>
-  <div style="display:flex; gap:40px; align-items:center; margin-top:24px">
-    <div style="flex:1">
-      <p class="lead" style="margin-bottom:16px">Saya membuka <strong style="color:var(--fg)">3 SPPG</strong> untuk pilot pengukuran produksi.</p>
-      <ul style="color:var(--muted); font-size:16px; line-height:1.8; margin-left:20px">
-        <li>Checklist pengukuran produksi</li>
-        <li>Format pencatatan batch &amp; kendala</li>
-        <li>Pendampingan awal</li>
-      </ul>
+  <div class="cta-wrap">
+    <div style="max-width:560px">
+      <p class="lead" style="margin-bottom:18px">Saya membuka <strong style="color:var(--fg)">3 SPPG</strong> untuk pilot pengukuran produksi.</p>
+      <div class="bullets" style="gap:12px">
+        <div class="bullet"><div class="mark">✓</div><div class="body" style="font-size:16px">Checklist pengukuran produksi</div></div>
+        <div class="bullet"><div class="mark">✓</div><div class="body" style="font-size:16px">Format pencatatan batch &amp; kendala</div></div>
+        <div class="bullet"><div class="mark">✓</div><div class="body" style="font-size:16px">Pendampingan awal</div></div>
+      </div>
     </div>
     <div style="text-align:center">
-      <div style="width:160px; height:160px; background:#fff; border-radius:12px; display:flex; align-items:center; justify-content:center; color:#000; font-weight:700; font-size:12px; padding:10px; text-align:center;">
-        [ Tempel QR Code<br>Google Form Pilot ]
-      </div>
+      <div class="qr" id="qrBox">Tempel QR<br>form pilot di sini</div>
       <div style="font-size:12px;color:var(--muted);margin-top:10px">Scan untuk daftar</div>
     </div>
   </div>
-  <div class="notes"><div class="nt">Catatan</div><p>Saya tidak akan mengarang angka. Saya buka tiga SPPG untuk pilot. Datanya untuk kita belajar bersama.</p></div>
+  <div class="notes"><div class="nt">Catatan</div><p>Saya tidak akan mengarang angka penghematan. Justru pelajaran hari ini: angka harus diukur, bukan dikira. Karena itu saya buka tiga SPPG untuk pilot. Datanya untuk kita belajar bersama.</p></div>
 </section>
 
 <!-- 14 -->
 <section class="slide">
   <div class="kicker">Penutup</div>
   <h1 style="font-size:clamp(26px,3.6vw,52px);max-width:22ch;line-height:1.25">Terima kasih.</h1>
-  <div style="margin-top:30px;padding-left:16px;border-left:3px solid var(--accent);font-size:22px;font-style:italic;color:var(--fg);max-width:60ch">
+  <div class="quote" style="max-width:60ch;margin-top:30px">
     Tujuan akhirnya bukan menu yang lebih murah, tapi sistem produksi yang efisien, terukur, bergizi, aman, dan diterima penerima manfaat.
   </div>
   <div class="title-meta" style="margin-top:44px">
     <strong>Chef Warman</strong><span class="dot"></span>
     <span>Chef Warman Food Network</span><span class="dot"></span>
     <span>WA 08121034602</span><span class="dot"></span>
-    <span>chefwarman.my.id</span>
+    <span>linktr.ee/almosphere</span>
   </div>
-  <div class="notes"><div class="nt">Catatan</div><p>Terima kasih. Saya buka sesi diskusi.</p></div>
+  <div class="notes"><div class="nt">Catatan</div><p>Terima kasih. Saya buka sesi diskusi. Pertanyaan yang terlalu teknis akan saya jawab lewat kontak ini setelah sesi.</p></div>
 </section>
 
 </div>
@@ -386,15 +437,25 @@ h2{font-size:clamp(26px,3.4vw,48px);line-height:1.12;font-weight:700;letter-spac
   const bar = document.getElementById('bar');
   const counter = document.getElementById('counter');
   let i = 0;
+
   function render(){
     slides.forEach((s,n)=>s.classList.toggle('active', n===i));
     bar.style.width = ((i+1)/slides.length*100)+'%';
     counter.textContent = String(i+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0');
+    history.replaceState(null,'','#'+(i+1));
   }
-  function go(n){ i = Math.max(0, Math.min(slides.length-1, n)); render(); }
+  function go(n){
+    i = Math.max(0, Math.min(slides.length-1, n));
+    render();
+  }
+  function next(){ go(i+1); }
+  function prev(){ go(i-1); }
+
   document.addEventListener('keydown', e=>{
-    if(['ArrowRight','ArrowDown',' ','PageDown','Enter'].includes(e.key)){ e.preventDefault(); go(i+1); }
-    else if(['ArrowLeft','ArrowUp','PageUp','Backspace'].includes(e.key)){ e.preventDefault(); go(i-1); }
+    if(['ArrowRight','ArrowDown',' ','PageDown','Enter'].includes(e.key)){ e.preventDefault(); next(); }
+    else if(['ArrowLeft','ArrowUp','PageUp','Backspace'].includes(e.key)){ e.preventDefault(); prev(); }
+    else if(e.key==='Home'){ e.preventDefault(); go(0); }
+    else if(e.key==='End'){ e.preventDefault(); go(slides.length-1); }
     else if(e.key.toLowerCase()==='f'){
       if(!document.fullscreenElement) document.documentElement.requestFullscreen();
       else document.exitFullscreen();
@@ -405,10 +466,23 @@ h2{font-size:clamp(26px,3.4vw,48px);line-height:1.12;font-weight:700;letter-spac
       if(n){ gn.innerHTML = n.innerHTML; gn.classList.toggle('show'); }
     }
   });
+
   document.addEventListener('click', e=>{
     if(e.target.closest('.notes')) return;
-    if(e.shiftKey) go(i-1); else go(i+1);
+    if(e.shiftKey) prev(); else next();
   });
+
+  let x0=null;
+  document.addEventListener('touchstart', e=>{ x0=e.touches[0].clientX; },{passive:true});
+  document.addEventListener('touchend', e=>{
+    if(x0===null) return;
+    const dx = e.changedTouches[0].clientX - x0;
+    if(Math.abs(dx)>60){ dx<0?next():prev(); }
+    x0=null;
+  },{passive:true});
+
+  const h = parseInt(location.hash.replace('#',''),10);
+  if(!isNaN(h) && h>=1 && h<=slides.length) i = h-1;
   render();
 })();
 </script>
