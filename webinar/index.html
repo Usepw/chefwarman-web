@@ -77,25 +77,41 @@ h2{font-size:clamp(26px,3.4vw,48px);line-height:1.12;font-weight:700;letter-spac
   font-style:italic;max-width:60ch;
 }
 
-/* ---------- GALERI GAMBAR (SLIDE 5) ---------- */
-.galeri {
-  display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; align-items: stretch; margin-top: 20px; width: 100%;
+/* ---------- GALERI GRID (SLIDE 5) ---------- */
+.galeri-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 12px;
+  max-width: 750px;
+  margin: 10px auto 0;
+  align-items: center;
 }
 .galeri-item {
-  background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 10px;
-  text-align: center; width: 130px; display: flex; flex-direction: column; transition: transform 0.2s;
+  background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 8px;
+  text-align: center; display: flex; flex-direction: column; transition: transform 0.2s;
 }
-.galeri-item:hover { transform: translateY(-3px); }
 .galeri-item img {
-  width: 100%; height: 100px; object-fit: cover; border-radius: 8px; margin-bottom: 8px;
+  width: 100%; height: 80px; object-fit: cover; border-radius: 8px; margin-bottom: 6px;
 }
 .galeri-item span {
   font-size: 11px; font-weight: 600; color: var(--fg); line-height: 1.2; margin-top: auto;
 }
+/* Style khusus untuk Chicken Base */
 .galeri-item.base {
-  border: 2px solid var(--accent); box-shadow: 0 0 20px rgba(233, 165, 60, 0.2);
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 25px rgba(233, 165, 60, 0.3);
+  transform: scale(1.15); /* Membuat kotak base lebih besar */
+  z-index: 10;
+  background: #1c212b;
+  padding: 12px;
 }
-.galeri-item.base span { color: var(--accent); font-weight: 800; font-size: 12px; }
+.galeri-item.base img {
+  height: 100px; /* Gambar base lebih tinggi */
+}
+.galeri-item.base span {
+  color: var(--accent); font-weight: 800; font-size: 13px;
+}
 
 /* ---------- TABLE ---------- */
 .tbl{width:100%;border-collapse:collapse;margin-top:clamp(10px,1.4vw,18px);font-size:clamp(12px,1.35vw,19px)}
@@ -254,7 +270,7 @@ h2{font-size:clamp(26px,3.4vw,48px);line-height:1.12;font-weight:700;letter-spac
   <div class="kicker">Peta Kemungkinan</div>
   <h2>1 Base → <span class="accent">8 Produk</span></h2>
   
-  <div class="galeri">
+  <div class="galeri-grid">
     <div class="galeri-item"><img src="IMG_9734.jpeg"><span>Chicken Nori</span></div>
     <div class="galeri-item"><img src="IMG_9735.jpeg"><span>Chicken Pangsit</span></div>
     <div class="galeri-item"><img src="IMG_9736.jpeg"><span>Chicken Dimsum</span></div>
